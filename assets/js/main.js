@@ -1,15 +1,21 @@
 //we have to first setup a game loop (see main()  <--this is the game loop)
 //A game loop just repeats itself to constantly update game render in a manually set interval
-//(eg..updating snake position, food, game calculations (basically, doing repaints)...)
+//(eg..updating snake position, fruit, game calculations (basically, doing repaints)...)
 
-import {snakeSpeed, logic as gameLogic, update as gameUpdate, draw as gameDraw} from './game.js'
+import {snakeSpeed, setup as gameSetup, logic as gameLogic, input as gameInput, draw as gameDraw, gameOver, resume} from './game.js'
 
 
 let lastRenderTime = 0;     //this GLOBAL variable stores the value of currentTime after calling 
 
 const gameBoard = document.getElementById('game-board');
 
+let key=77;
+document.addEventListener("keydown", function(event){
+    key = event.key
+});
+
 function main(currentTime){ //currentTime represents the 'time' when this function runs requestAnimationFrame() 
+    gameSetup();
     while(!gameOver){
         if(resume){
             window.requestAnimationFrame(main);
@@ -25,17 +31,12 @@ function main(currentTime){ //currentTime represents the 'time' when this functi
             //we go below this line only of the above if statement stands false.
 
 
-
-
-
-
-            console.log("render");
+            //console.log("render");
             
             lastRenderTime = currentTime;//after executing window.requestAnimationFrame(main) currentTime is stored in lastRender time
             
-            
+            gameInput(key);
             gameLogic();
-            gameUpdate();
             gameDraw(gameBoard);
             //console.log(currentTime);
             //console.log(secondsSinceLastRender);

@@ -22,13 +22,13 @@ body{
     grid-template-columns: repeat(21,1fr);
 }
 
-.snake, .food{
+.snake, .fruit{
     border: 0.2vmin solid black;
 }
 .snake {
     background-color: blue;
 }
 
-.food{
+.fruit{
     background-color: lightgreen;
 }
