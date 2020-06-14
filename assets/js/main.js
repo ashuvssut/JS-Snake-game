@@ -9,13 +9,13 @@ let lastRenderTime = 0;     //this GLOBAL variable stores the value of currentTi
 
 const gameBoard = document.getElementById('game-board');
 
-let key=77;
+let key='ArrowUp';
 document.addEventListener("keydown", function(event){
     key = event.key
 });
 
 function main(currentTime){ //currentTime represents the 'time' when this function runs requestAnimationFrame() 
-    gameSetup();
+    
     while(!gameOver){
         if(resume){
             window.requestAnimationFrame(main);
@@ -45,5 +45,6 @@ function main(currentTime){ //currentTime represents the 'time' when this functi
 }
 
 //entry point
+gameSetup();
 window.requestAnimationFrame(main);
 

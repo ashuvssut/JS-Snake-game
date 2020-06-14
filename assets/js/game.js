@@ -6,6 +6,7 @@ let score;
 const direction = {STOP : 'STOP', UP : 'UP', LEFT : 'LEFT', DOWN : 'DOWN', RIGHT : 'RIGHT'};
 let dir = direction.STOP;
 let h, w;
+let removeBodyPiece= false;
 let fx, fy, tail=0; //(fx, fy) are fruit coordinates
 const snakeBody = []; //This array store bodyPieces. each body piece has a x and a y coordinate value
 const bodyCoordinate = {
@@ -31,7 +32,7 @@ export function input(key){
             case 'p':resume = false; break;
 
             case 'ArrowLeft': if (dir == direction.DOWN){ break; }  else{ dir = direction.UP; break; }
-            case 'ArrowRight': if (dir == direction.UP){ break; }    else{ dir = direction.DOWN; break; }
+            case 'ArrowRight': if (dir == direction.UP){ break; } else{ dir = direction.DOWN; break; }
             case 'ArrowUp': if (dir == direction.RIGHT){ break; } else{ dir = direction.LEFT; break;}
             case 'ArrowDown': if (dir == direction.LEFT){ break; }  else{ dir = direction.RIGHT; break;}
 
@@ -74,6 +75,13 @@ export function logic(){
 }
 
 export function draw(gameBoard){
+
+    //clear all body pieces first
+    
+    for (var i = 0; i < document.querySelectorAll(".snake").length; i++) {
+        document.querySelectorAll(".snake")[i].remove();
+    }
+
     snakeBody.forEach(bodyPiece => {
         
         //Prepare the snake body pieces...basically prepare a div to make it a grid that represents the bodyPiece and then just add it to the grid(gameBoard) as a child
@@ -83,8 +91,16 @@ export function draw(gameBoard){
         snakeBodyPiece.classList.add('snake');
         //set it as child of the grid base (gameBoard)
         gameBoard.appendChild(snakeBodyPiece);
+        removeBodyPiece= true;
 
         if (printFruit){
+            //clear fruit div first
+            for (var i = 0; i < document.querySelectorAll(".fruit").length; i++) {
+
+                document.querySelectorAll('.fruit')[i].remove();
+            }
+            
+
             const fruit = document.createElement('div')
             fruit.style.gridRowStart = fx;
             fruit.style.gridColumnStart = fy;
