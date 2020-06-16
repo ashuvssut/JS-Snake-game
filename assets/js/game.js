@@ -1,4 +1,4 @@
-export const snakeSpeed = 1;       //blocks covered per sec
+export const snakeSpeed = 3;       //blocks covered per sec
 export let gameOver=false, resume=true;
 let printFruit=true;
 let score;
@@ -7,9 +7,9 @@ const direction = {STOP : 'STOP', UP : 'UP', LEFT : 'LEFT', DOWN : 'DOWN', RIGHT
 let dir = direction.STOP;
 let h, w;
 let removeBodyPiece= false;
-let fx, fy, tail=0; //(fx, fy) are fruit coordinates
+let fx, fy, tail=1; //(fx, fy) are fruit coordinates
 const snakeBody = []; //This array store bodyPieces. each body piece has a x and a y coordinate value
-const bodyCoordinate = {
+let bodyCoordinate = {
     x:null,
     y:null,
 }
@@ -49,8 +49,8 @@ export function logic(){
     if (bodyCoordinate.x == fx && bodyCoordinate.y == fy) {
 		tail++; 
 		score += 10;
-		fx = Math.random() % w;
-        fy = Math.random() % h;
+		fx = Math.floor((Math.random())*w) + 1
+        fy = Math.floor((Math.random())*h) + 1
         printFruit=true;
     }
     if (tail > 0) {
@@ -58,10 +58,10 @@ export function logic(){
 		if (snakeBody.length > tail) { snakeBody.pop(); }
 	}
 	switch (dir) {
-	case 'UP': bodyCoordinate.y--; break;
-	case 'LEFT': bodyCoordinate.x--; break;
-	case 'DOWN': bodyCoordinate.y++;  break;
-	case 'RIGHT': bodyCoordinate.x++; break;
+	case 'UP': bodyCoordinate.y -= 1; break;
+	case 'LEFT': bodyCoordinate.x -= 1; break;
+	case 'DOWN': bodyCoordinate.y +=1;  break;
+	case 'RIGHT': bodyCoordinate.x +=1; break;
 	//case STOP: tail = 1; goto exePt;
 	}
 
@@ -69,7 +69,7 @@ export function logic(){
 	// 	gameOver = true;
 	// }
 		
-	if (bodyCoordinate.x<0 || bodyCoordinate.x>w - 1 || bodyCoordinate.y<0 || bodyCoordinate.y>h - 1) {
+    if (bodyCoordinate.x<1 || bodyCoordinate.x>w+1 || bodyCoordinate.y<1 || bodyCoordinate.y>h+1) {
 		gameOver = true;
 	}
 }
@@ -77,7 +77,6 @@ export function logic(){
 export function draw(gameBoard){
 
     //clear all body pieces first
-    
     for (var i = 0; i < document.querySelectorAll(".snake").length; i++) {
         document.querySelectorAll(".snake")[i].remove();
     }
@@ -89,6 +88,7 @@ export function draw(gameBoard){
         snakeBodyPiece.style.gridRowStart = bodyPiece.x;
         snakeBodyPiece.style.gridColumnStart = bodyPiece.y;
         snakeBodyPiece.classList.add('snake');
+
         //set it as child of the grid base (gameBoard)
         gameBoard.appendChild(snakeBodyPiece);
         removeBodyPiece= true;
@@ -96,11 +96,9 @@ export function draw(gameBoard){
         if (printFruit){
             //clear fruit div first
             for (var i = 0; i < document.querySelectorAll(".fruit").length; i++) {
-
                 document.querySelectorAll('.fruit')[i].remove();
             }
             
-
             const fruit = document.createElement('div')
             fruit.style.gridRowStart = fx;
             fruit.style.gridColumnStart = fy;
