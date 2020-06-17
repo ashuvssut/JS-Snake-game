@@ -71,9 +71,9 @@ export function logic(){
 	//case STOP: tail = 1; goto exePt;
 	}
 
-	// if (!(snakeBody.find(bodyCoordinate) == undefined)) {
-	// 	gameOver = true;
-	// }
+	if (snakeBody.find(v => v.x === bodyCoordinateX && v.y === bodyCoordinateY))  {
+		gameOver = true;
+	}
 		
     if (bodyCoordinateX<1 || bodyCoordinateX>w+1 || bodyCoordinateY<1 || bodyCoordinateY>h+1) {
 		gameOver = true;
