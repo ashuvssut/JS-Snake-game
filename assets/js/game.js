@@ -1,4 +1,4 @@
-export const snakeSpeed = 3;       //blocks covered per sec
+export const snakeSpeed = 4;       //blocks covered per sec
 export let gameOver=false, resume=true;
 let printFruit=true;
 let score;
@@ -37,10 +37,10 @@ export function input(key){
             case 'P':resume = false; break;
             case 'p':resume = false; break;
 
-            case 'ArrowLeft': if (dir == direction.DOWN){ break; }  else{ dir = direction.UP; break; }
-            case 'ArrowRight': if (dir == direction.UP){ break; } else{ dir = direction.DOWN; break; }
-            case 'ArrowUp': if (dir == direction.RIGHT){ break; } else{ dir = direction.LEFT; break;}
-            case 'ArrowDown': if (dir == direction.LEFT){ break; }  else{ dir = direction.RIGHT; break;}
+            case 'ArrowUp': if (dir == direction.DOWN){ break; }  else{ dir = direction.UP; break; }
+            case 'ArrowDown': if (dir == direction.UP){ break; } else{ dir = direction.DOWN; break; }
+            case 'ArrowLeft': if (dir == direction.RIGHT){ break; } else{ dir = direction.LEFT; break;}
+            case 'ArrowRight': if (dir == direction.LEFT){ break; }  else{ dir = direction.RIGHT; break;}
 
             case 'C': dir = direction.STOP; break;
             case 'c': dir = direction.STOP; break;
@@ -52,7 +52,7 @@ export function input(key){
 }
 
 export function logic(){
-    if (bodyCoordinateX == fx && bodyCoordinateY == fy) {
+    if (bodyCoordinateY== fx && bodyCoordinateX == fy) {
 		tail++; 
 		score += 10;
 		fx = Math.floor((Math.random())*w) + 1
@@ -60,14 +60,14 @@ export function logic(){
         printFruit=true;
     }
     
-	snakeBody.unshift(new bodyCoordinate(bodyCoordinateX, bodyCoordinateY));
+	snakeBody.unshift(new bodyCoordinate(bodyCoordinateY, bodyCoordinateX));
 	if (snakeBody.length > tail) { snakeBody.pop(); }
 
 	switch (dir) {
-	case 'UP': bodyCoordinateY -= 1; break;
-	case 'LEFT': bodyCoordinateX -= 1; break;
-	case 'DOWN': bodyCoordinateY +=1;  break;
-	case 'RIGHT': bodyCoordinateX +=1; break;
+	case 'UP': bodyCoordinateY--; break;
+	case 'LEFT': bodyCoordinateX--; break;
+	case 'DOWN': bodyCoordinateY++;  break;
+	case 'RIGHT': bodyCoordinateX++; break;
 	//case STOP: tail = 1; goto exePt;
 	}
 
@@ -78,7 +78,7 @@ export function logic(){
     //     }
     // }
 		
-    if (bodyCoordinateX<1 || bodyCoordinateX>w+1 || bodyCoordinateY<1 || bodyCoordinateY>h+1) {
+    if (bodyCoordinateX<1 || bodyCoordinateX>w || bodyCoordinateY<1 || bodyCoordinateY>h) {
 		gameOver = true;
 	}
 }
