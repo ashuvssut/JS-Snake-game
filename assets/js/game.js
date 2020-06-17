@@ -23,9 +23,9 @@ export function setup() {
     gameOver = false;
     tail = 2;
     score = 0;
-    h = 20; w = 20;
-    bodyCoordinateX = h/2; 
-    bodyCoordinateY = w/2;
+    h = 21; w = 21;
+    bodyCoordinateX = Math.floor(h/2); 
+    bodyCoordinateY = Math.floor(w/2);
     
     fx = Math.floor((Math.random())*w) + 1
     fy = Math.floor((Math.random())*h) + 1
@@ -71,11 +71,12 @@ export function logic(){
 	//case STOP: tail = 1; goto exePt;
 	}
 
-    if(dir !== direction.STOP){
-        if (snakeBody.find(v => v.x === bodyCoordinateX && v.y === bodyCoordinateY))  {
-            gameOver = true;
-        }
-    }
+    // if(dir !== direction.STOP){
+    //     if(resume === false)
+    //     if (snakeBody.find(v => v.x === bodyCoordinateX && v.y === bodyCoordinateY))  {
+    //         gameOver = true;
+    //     }
+    // }
 		
     if (bodyCoordinateX<1 || bodyCoordinateX>w+1 || bodyCoordinateY<1 || bodyCoordinateY>h+1) {
 		gameOver = true;
