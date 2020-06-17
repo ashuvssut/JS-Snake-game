@@ -8,7 +8,7 @@ let dir = direction.STOP;
 let h, w;
 let bodyCoordinateX = h/2; 
 let bodyCoordinateY = w/2;
-let fx, fy, tail=1; //(fx, fy) are fruit coordinates
+let fx, fy, tail=2; //(fx, fy) are fruit coordinates
 const snakeBody = []; //This array store bodyPieces. each body piece has a x and a y coordinate value
 class bodyCoordinate {
     constructor(x, y) {
@@ -21,7 +21,7 @@ export function setup() {
     dir = direction.STOP;
    // snakeBody = []  //clear array (actually we are creating a new array)
     gameOver = false;
-    tail = 1;
+    tail = 2;
     score = 0;
     h = 20; w = 20;
     bodyCoordinateX = h/2; 
@@ -71,9 +71,11 @@ export function logic(){
 	//case STOP: tail = 1; goto exePt;
 	}
 
-	if (snakeBody.find(v => v.x === bodyCoordinateX && v.y === bodyCoordinateY))  {
-		gameOver = true;
-	}
+    if(dir !== direction.STOP){
+        if (snakeBody.find(v => v.x === bodyCoordinateX && v.y === bodyCoordinateY))  {
+            gameOver = true;
+        }
+    }
 		
     if (bodyCoordinateX<1 || bodyCoordinateX>w+1 || bodyCoordinateY<1 || bodyCoordinateY>h+1) {
 		gameOver = true;
@@ -114,4 +116,7 @@ export function draw(gameBoard){
             printFruit=false;
         }
     });
+
+    //Scoreboard Updater
+    document.querySelector("span").innerHTML= score;
 }

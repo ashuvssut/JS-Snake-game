@@ -9,7 +9,7 @@ let lastRenderTime = 0;     //this GLOBAL variable stores the value of currentTi
 
 const gameBoard = document.getElementById('game-board');
 
-let key='ArrowUp';
+let key=null;
 document.addEventListener("keydown", function(event){
     key = event.key
 });
