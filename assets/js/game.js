@@ -101,10 +101,10 @@ export function draw(gameBoard){
 
         if (printFruit){
             //clear fruit div first
-            for (var i = 0; i < document.querySelectorAll(".fruit").length; i++) {
-                document.querySelectorAll('.fruit')[i].remove();
+            while (document.querySelector(".fruit")) {
+                document.querySelector(".fruit").remove();
             }
-            
+                        
             const fruit = document.createElement('div')
             fruit.style.gridRowStart = fx;
             fruit.style.gridColumnStart = fy;
