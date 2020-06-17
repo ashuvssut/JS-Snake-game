@@ -6,13 +6,17 @@ let score;
 const direction = {STOP : 'STOP', UP : 'UP', LEFT : 'LEFT', DOWN : 'DOWN', RIGHT : 'RIGHT'};
 let dir = direction.STOP;
 let h, w;
-let removeBodyPiece= false;
+let bodyCoordinateX = h/2; 
+let bodyCoordinateY = w/2;
 let fx, fy, tail=1; //(fx, fy) are fruit coordinates
 const snakeBody = []; //This array store bodyPieces. each body piece has a x and a y coordinate value
-let bodyCoordinate = {
-    x:null,
-    y:null,
+class bodyCoordinate {
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
+    }
 }
+
 export function setup() {
     dir = direction.STOP;
    // snakeBody = []  //clear array (actually we are creating a new array)
@@ -20,7 +24,9 @@ export function setup() {
     tail = 1;
     score = 0;
     h = 20; w = 20;
-    bodyCoordinate.x = w/2; bodyCoordinate.y = h/2;
+    bodyCoordinateX = h/2; 
+    bodyCoordinateY = w/2;
+    
     fx = Math.floor((Math.random())*w) + 1
     fy = Math.floor((Math.random())*h) + 1
 }
@@ -46,22 +52,22 @@ export function input(key){
 }
 
 export function logic(){
-    if (bodyCoordinate.x == fx && bodyCoordinate.y == fy) {
+    if (bodyCoordinateX == fx && bodyCoordinateY == fy) {
 		tail++; 
 		score += 10;
 		fx = Math.floor((Math.random())*w) + 1
         fy = Math.floor((Math.random())*h) + 1
         printFruit=true;
     }
-    if (tail > 0) {
-		snakeBody.unshift(bodyCoordinate);
-		if (snakeBody.length > tail) { snakeBody.pop(); }
-	}
+    
+	snakeBody.unshift(new bodyCoordinate(bodyCoordinateX, bodyCoordinateY));
+	if (snakeBody.length > tail) { snakeBody.pop(); }
+
 	switch (dir) {
-	case 'UP': bodyCoordinate.y -= 1; break;
-	case 'LEFT': bodyCoordinate.x -= 1; break;
-	case 'DOWN': bodyCoordinate.y +=1;  break;
-	case 'RIGHT': bodyCoordinate.x +=1; break;
+	case 'UP': bodyCoordinateY -= 1; break;
+	case 'LEFT': bodyCoordinateX -= 1; break;
+	case 'DOWN': bodyCoordinateY +=1;  break;
+	case 'RIGHT': bodyCoordinateX +=1; break;
 	//case STOP: tail = 1; goto exePt;
 	}
 
@@ -69,7 +75,7 @@ export function logic(){
 	// 	gameOver = true;
 	// }
 		
-    if (bodyCoordinate.x<1 || bodyCoordinate.x>w+1 || bodyCoordinate.y<1 || bodyCoordinate.y>h+1) {
+    if (bodyCoordinateX<1 || bodyCoordinateX>w+1 || bodyCoordinateY<1 || bodyCoordinateY>h+1) {
 		gameOver = true;
 	}
 }
@@ -77,8 +83,9 @@ export function logic(){
 export function draw(gameBoard){
 
     //clear all body pieces first
-    for (var i = 0; i < document.querySelectorAll(".snake").length; i++) {
-        document.querySelectorAll(".snake")[i].remove();
+    
+    while (document.querySelector(".snake")) {
+        document.querySelector(".snake").remove();
     }
 
     snakeBody.forEach(bodyPiece => {
@@ -91,7 +98,6 @@ export function draw(gameBoard){
 
         //set it as child of the grid base (gameBoard)
         gameBoard.appendChild(snakeBodyPiece);
-        removeBodyPiece= true;
 
         if (printFruit){
             //clear fruit div first
