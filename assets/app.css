@@ -9,6 +9,7 @@ body{
     height: 95vh;
     width: 100vw;
     overflow: hidden;
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
