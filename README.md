@@ -12,7 +12,7 @@ This game will have more features like controlling snake-speed, custom game-boar
 
 ---------------------------------------------
 
-I have completed all the basic UI and JS functions on the game BUT a few simple features are required. Refer the [TODO](## TODO) list below.
+I have completed all the basic UI and JS functions on the game BUT a few simple features are required. Refer the [TODO](##TODO) list below.
 
 You can add these simple features if you like...
 
