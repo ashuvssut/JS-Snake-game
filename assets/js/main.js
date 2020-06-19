@@ -30,10 +30,10 @@ let key2=null;
         gameBoardMO.get('tripletap').recognizeWith('tap');
 
     // listen to events...
-    gameBoardInstance.on("swipeleft", event => key = "ArrowLeft" );
-    gameBoardInstance.on("swiperight", event => key = "ArrowRight" );
-    gameBoardInstance.on("swipeup", event => key = "ArrowUp" );
-    gameBoardInstance.on("swipedown", event => key = "ArrowDown" );
+    gameBoardInstance.on("panleft", event => key = "ArrowLeft" );
+    gameBoardInstance.on("panright", event => key = "ArrowRight" );
+    gameBoardInstance.on("panup", event => key = "ArrowUp" );
+    gameBoardInstance.on("pandown", event => key = "ArrowDown" );
     gameBoardMO.on("tripletap", event => key = "C" );
 
 document.addEventListener("keydown", function(event){
