@@ -6,7 +6,7 @@
 
 body{
     font-family: Arial, Helvetica, sans-serif;
-    height: 100vh;
+    height: 95vh;
     width: 100vw;
     overflow: hidden;
     display: flex;
@@ -24,8 +24,6 @@ body{
     grid-template-rows: repeat(21,1fr);
     grid-template-columns: repeat(21,1fr);
     border: 5vmin solid grey;
-
-
 }
 
 .snake, .fruit{
@@ -42,7 +40,7 @@ body{
 }
 
 #score-board{
-    height: 7vmin;
+    height: 6vmin;
     background-color: white;
     width: 30%;
     border-radius: 4px;
