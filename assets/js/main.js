@@ -4,13 +4,38 @@
 
 import {snakeSpeed, setup as gameSetup, logic as gameLogic, input as gameInput, draw as gameDraw, gameOver, resume} from './game.js'
 
-
 let lastRenderTime = 0;     //this GLOBAL variable stores the value of currentTime after calling 
 
 const gameBoard = document.getElementById('game-board');
 
 let key=null;
 let key2=null;
+
+//>>HAMMER.JS implementation
+    // create a simple instance
+    var gameBoardInstance = new Hammer(gameBoard);
+
+    //Adding a tripletap event
+        // We create a manager object, which is the same as Hammer(), but without the presetted recognizers. (example of presetted recognizers: 'panright')
+        var gameBoardMO = new Hammer.Manager(gameBoard);
+
+        // Default, tap recognizer
+        gameBoardMO.add( new Hammer.Tap() ); //We have to add this 'tap' recognizer explicitly because manager object have no presetted recognizers
+
+        // Tap recognizer with minimal 3 taps
+        gameBoardMO.add( new Hammer.Tap({ event: 'tripletap', taps: 3 }) );
+
+        // we want to recognize this simultaneous, so a tripletap will be detected even while a tap has been recognized.
+        // the tap event will be emitted on every tap
+        gameBoardMO.get('tripletap').recognizeWith('tap');
+
+    // listen to events...
+    gameBoardInstance.on("panleft", event => key = "ArrowLeft" );
+    gameBoardInstance.on("panright", event => key = "ArrowRight" );
+    gameBoardInstance.on("panup", event => key = "ArrowUp" );
+    gameBoardInstance.on("pandown", event => key = "ArrowDown" );
+    gameBoardMO.on("tripletap", event => key = "C" );
+
 document.addEventListener("keydown", function(event){
     key = event.key
 });

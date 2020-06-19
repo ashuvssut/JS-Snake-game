@@ -1,4 +1,4 @@
-export const snakeSpeed = 4;       //blocks covered per sec
+export const snakeSpeed = 3;       //blocks covered per sec
 export let gameOver=false, resume=true;
 let printFruit=true;
 let score;
