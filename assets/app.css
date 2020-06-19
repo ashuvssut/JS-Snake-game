@@ -16,8 +16,8 @@ body{
 }
 
 #game-board{
-    height: 85vmin;
-    width: 85vmin;
+    height: 80vmin;
+    width: 80vmin;
     background-color: cyan;
     display: grid;
     grid-template-rows: repeat(21,1fr);
@@ -41,7 +41,7 @@ body{
 }
 
 #score-board{
-    height: 5vmin;
+    height: 7vmin;
     background-color: white;
     width: 30%;
     border-radius: 4px;
@@ -52,4 +52,5 @@ body{
 }
 #score{
     font-weight:bold;
+    font-size: 10px;
 }
