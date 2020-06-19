@@ -12,13 +12,13 @@ This game will have more features like controlling snake-speed, custom game-boar
 
 ---------------------------------------------
 
-I have completed all the basic UI and JS functions on the game BUT a few simple features are required. Refer the [TODO](TODO-id) list below.
+I have completed all the basic UI and JS functions on the game BUT a few simple features are required. Refer the [TODO](## TODO) list below.
 
 You can add these simple features if you like...
 
 I would be happy to help you if you wanna contribute
 
-## Follow the link in the repo Description to play the game
+## Follow the link in the Repo Description to play the game
 
 ---------------------------------------------
 
@@ -32,7 +32,7 @@ I would be happy to help you if you wanna contribute
 
 - Added hammer.js for swipe functionality
 
-## TODO {: #TODO-id}
+## TODO
 
 ---------------------------------------------
 
