@@ -8,6 +8,8 @@ This Snake game will carry the exact logic of the snake game provided in the Con
 
 This game will have more features like controlling snake-speed, custom game-board dimensions,etc..
 
+Used hammer.js for Swipe Functionality
+
 ## Contribute
 
 ---------------------------------------------
